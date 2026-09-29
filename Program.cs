@@ -1,4 +1,14 @@
-﻿static bool IsMaintenanceRequired(int engineHour) => engineHour >= 1000 ? true : false;
+﻿using System.Data.Common;
+using System.Runtime.CompilerServices;
+using Vehicle;
+using VehcleInc;
+using VehicleStatic;
+using VehicleEncap_1;
+using VehicleEnum;
+using System.Net;
+using Employee;
+
+static bool IsMaintenanceRequired(int engineHour) => engineHour >= 1000 ? true : false;
 Console.WriteLine(IsMaintenanceRequired(10000));
 
 static decimal CalculateDistancePerDay(decimal kilometers, decimal days) => kilometers / days;
@@ -199,10 +209,10 @@ VehiclesCls vehicle1 = new()
 
 VehiclesCls vehicle2 = new()
 {
-    Name= "CAT 320",
-PlateNumber= "ET-1002",
-EngineHours= 750,
-DistanceKm= 28000
+    Name = "CAT 320",
+    PlateNumber = "ET-1002",
+    EngineHours = 750,
+    DistanceKm = 28000
 };
 
 Console.WriteLine(vehicle2.Name);
@@ -210,6 +220,189 @@ Console.WriteLine(vehicle2.Name);
 vehicle1.DisplayInfo();
 vehicle2.DisplayInfo();
 
+
+vehicleProp vehicleProp = new()
+{
+    Id = 1,
+    Name = "Toyota Hilux king cap",
+    PlateNumber = "ET-1001",
+
+    DistanceKm = 45000
+};
+vehicleProp.AddEngineHours(250);
+
+////
+
+VehicleOnly vehicleImp = new(1, "AAA-1234", "BYD", 1243, 345);
+
+Console.WriteLine(vehicleImp.Name);
+Console.WriteLine($"plate number is {vehicleImp.PlateNumber}");
+Console.WriteLine($"this is working Hours {vehicleImp.EngineHours}");
+Console.WriteLine($"this is distance in Km {vehicleImp.DistanceKm}");
+Console.WriteLine($"Vehicle status {vehicleImp.NeedsMaintenance}");
+vehicleImp.AddEngineHours(230);
+
+////
+/// 
+VehicleInc vehicleinc = new()
+{
+    Name = "CAT 320",
+    PlateNumber = "ET-1002"
+};
+
+Console.WriteLine($"this is a test from vehicleINc {vehicleinc.Name}");
+Console.WriteLine(vehicleinc.PlateNumber);
+
+vehicleinc.AddEngineHours(250);
+vehicleinc.AddEngineHours(-100);
+vehicleinc.AddEngineHours(700);
+vehicleinc.AddEngineHours(-300);
+
+
+Console.WriteLine($"this is my test {vehicleinc.EngineHours}");
+///
+
+VehicleEncap vehicleEncap = new(1, "Honda", "AAA-1221");
+
+Console.WriteLine($"Encap Vehicle name {vehicleEncap.Name}");
+Console.WriteLine($"this is encap Id {vehicleEncap.Id}");
+Console.WriteLine($"encap Plate {vehicleEncap.Platenumber}");
+
+vehicleEncap.AddKiloMeter(1212);
+vehicleEncap.AddEnginehour(240);
+vehicleEncap.AddKiloMeter(-870);
+vehicleEncap.AddKiloMeter(1000);
+vehicleEncap.AddEnginehour(-120);
+vehicleEncap.AddEnginehour(100);
+vehicleEncap.AddEnginehour(750);
+Console.WriteLine($"Engine Hours: {vehicleEncap.EngineHours}");
+Console.WriteLine($"Distance: {vehicleEncap.DistanceKm}");
+Console.WriteLine($"Needs Maintenance:  {vehicleEncap.NeedsMaintenance}");
+
+///
+
+
+VehicleStat vehicleStat1 = new("CAT 320", "ET-1001");
+VehicleStat vehicleStat2 = new("Toyota Hilux", "ET-1002");
+VehicleStat vehicleStat3 = new("Volvo FH", "ET-1003");
+VehicleStat vehicleStat4 = new("BYD E2", "ET-4403");
+
+
+vehicleStat1.AddEngineHours(500);
+
+Console.WriteLine("-------------");
+
+vehicleStat1.AddEngineHours(-100);
+vehicleStat2.AddEngineHours(1000);
+vehicleStat3.AddEngineHours(750);
+vehicleStat4.AddEngineHours(5);
+Console.WriteLine($"Vehicle Name: {vehicleStat1.Name}");
+Console.WriteLine($"Plate Number: {vehicleStat1.PlateNumber}");
+Console.WriteLine($"Engine Hour: {vehicleStat1.EngineHours}");
+
+Console.WriteLine("-------------");
+Console.WriteLine($"Vehicle Name: {vehicleStat2.Name}");
+Console.WriteLine($"Plate Number: {vehicleStat2.PlateNumber}");
+Console.WriteLine($"Engine Hour: {vehicleStat2.EngineHours}");
+Console.WriteLine("-------------");
+
+Console.WriteLine($"Vehicle Name: {vehicleStat3.Name}");
+Console.WriteLine($"Plate Number: {vehicleStat3.PlateNumber}");
+Console.WriteLine($"Engine Hour: {vehicleStat3.EngineHours}");
+
+Console.WriteLine("-------------");
+
+Console.WriteLine($"Vehicle Name: {vehicleStat4.Name}");
+Console.WriteLine($"Plate Number: {vehicleStat4.PlateNumber}");
+Console.WriteLine($"Engine Hour: {vehicleStat4.EngineHours}");
+
+Console.WriteLine("-------------");
+
+Console.WriteLine(VehicleStat.TotalVehicles);
+Console.WriteLine("-------------");
+
+//
+
+
+static void ShowStatus(VehiclesSatatus vehicle)
+{
+    switch (vehicle.Status)
+    {
+        case VehicleStatus.Working:
+            Console.WriteLine($"{vehicle.Name}: Vehicle is working");
+            break;
+
+        case VehicleStatus.Maintenance:
+            Console.WriteLine($"{vehicle.Name}: Vehicle needs maintenance");
+            break;
+
+        case VehicleStatus.Idle:
+            Console.WriteLine($"{vehicle.Name}: Vehicle is idle");
+            break;
+    }
+}
+
+
+VehiclesSatatus vehicleEnum1 = new("VolksWaggen", "ET-1001", VehicleStatus.Working);
+VehiclesSatatus vehicleEnum2 = new("Honda Civic", "AAA-0023", VehicleStatus.Maintenance);
+VehiclesSatatus vehicleEnum3 = new("Volvo FH", "ET-1003", VehicleStatus.Idle);
+
+
+
+
+
+Console.WriteLine("**************");
+Console.WriteLine(vehicleEnum1.Name);
+Console.WriteLine(vehicleEnum1.PlateNumber);
+ShowStatus(vehicleEnum1);
+Console.WriteLine("**************");
+
+Console.WriteLine("**************");
+Console.WriteLine(vehicleEnum2.Name);
+Console.WriteLine(vehicleEnum2.PlateNumber);
+ShowStatus(vehicleEnum2);
+Console.WriteLine("**************");
+
+Console.WriteLine("**************");
+Console.WriteLine(vehicleEnum3.Name);
+Console.WriteLine(vehicleEnum3.PlateNumber);
+
+ShowStatus(vehicleEnum3);
+Console.WriteLine("**************");
+
+
+//
+
+Console.WriteLine("######################");
+
+Developer developer1 =new(100,"beza",20000,"Nodejs");
+Developer developer2 =new(101,"Mekbib",50000,"C#");
+Console.WriteLine(developer1.Name);
+Console.WriteLine(developer1.ProgrammingLanguage);
+developer1.ClockIn();
+developer2.ClockOut();
+developer1.Work();
+developer2.Work();
+
+Manager manager1=new(104,"Sara",70000,8);
+Console.WriteLine(manager1.Name);
+Console.WriteLine(manager1.TeamSize);
+manager1.ClockIn();
+manager1.ClockOut();
+manager1.Work();
+
+Console.WriteLine("######################");
+
+
+
+
+/// 
+Console.WriteLine(vehicleProp.Id);
+Console.WriteLine(vehicleProp.Name);
+Console.WriteLine(vehicleProp.PlateNumber);
+Console.WriteLine(vehicleProp.EngineHours);
+Console.WriteLine(vehicleProp.DistanceKm);
+Console.WriteLine(vehicleProp.NeedsMaintenance);
 class VehiclesCls
 {
     public string? Name;
@@ -227,6 +420,54 @@ class VehiclesCls
     }
 
 }
+class vehicleProp
+{
+    public int Id { get; set; }
+    public string Name { get; set; } = "";
+    public string PlateNumber { get; set; } = "";
+    public decimal EngineHours { get; private set; }
+    public decimal DistanceKm { get; set; }
+
+    public void AddEngineHours(decimal hours)
+    {
+        if (hours > 0)
+        {
+            EngineHours += hours;
+        }
+
+    }
+    public bool NeedsMaintenance => EngineHours >= 1000;
+
+}
+
+class VehicleConst
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public string PlateNumber { get; set; }
+    public decimal EngineHours { get; private set; }
+    public decimal DistanceKm { get; set; }
+
+    public void VehicleDs(int id, string name, string plateNumber, decimal engineHours, decimal distanceKm)
+    {
+        Id = id;
+        this.Name = name;
+        PlateNumber = plateNumber;
+        EngineHours = engineHours;
+        DistanceKm = distanceKm;
+
+    }
+    public void AddEngineHours(decimal hours)
+    {
+        if (hours > 0)
+        {
+            EngineHours += hours;
+
+        }
+    }
+    public bool NeedsMaintenance => EngineHours >= 1000;
+}
+
 
 
 
