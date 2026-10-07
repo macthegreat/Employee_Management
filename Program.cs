@@ -7,6 +7,14 @@ using VehicleEncap_1;
 using VehicleEnum;
 using System.Net;
 using Employee;
+using Notifications;
+using Shipping;
+using AbNotify;
+using EmployeeAb;
+using Payments;
+using Payments;
+using IntNotify;
+
 
 static bool IsMaintenanceRequired(int engineHour) => engineHour >= 1000 ? true : false;
 Console.WriteLine(IsMaintenanceRequired(10000));
@@ -403,20 +411,161 @@ Console.WriteLine(vehicleProp.PlateNumber);
 Console.WriteLine(vehicleProp.EngineHours);
 Console.WriteLine(vehicleProp.DistanceKm);
 Console.WriteLine(vehicleProp.NeedsMaintenance);
+
+
+Notification Email = new EmailNotification();
+Notification Sms = new SmsNotifications();
+Notification Push = new PushNotification();
+
+Email.Send();
+Sms.Send();
+Push.Send(); 
+
+Notification[] notififications =
+{
+    new EmailNotification(),
+    new SmsNotifications(),
+    new PushNotification()
+};
+
+foreach (Notification notification in notififications)
+{
+    Console.WriteLine($"Sending notification: {notification.GetType().Name}");
+    notification.Send();
+}
+
+/// </summary>
+
+///shipping 
+Shippings standardShipping = new StandardShipping();
+Shippings expressShipping = new ExpressShipping();
+Shippings internationalShipping = new InternationalShipping();
+
+Console.WriteLine($"Standard Shipping Cost: {standardShipping.CalculateCost(5)}");
+Console.WriteLine($"Express Shipping Cost: {expressShipping.CalculateCost(5)}");
+Console.WriteLine($"International Shipping Cost: {internationalShipping.CalculateCost(5)}");
+/// 
+Shippings[] shippings =
+{
+  new StandardShipping(),
+  new ExpressShipping(),
+  new InternationalShipping()  
+};
+
+foreach(Shippings shipping in shippings)
+{
+    Console.WriteLine($"{shipping.CalculateCost(10)}");
+}
+/// 
+
+NotificationAb emailAb = new EmailNotificationAb("mekbibk3795@gmail.com");
+NotificationAb smsAb=new SmsNotificationAb("091091091");
+NotificationAb pushAb=new PushNotificationAb("mekbib");
+
+emailAb.Send();
+emailAb.ShowRecipient();
+smsAb.Send();
+pushAb.Send();
+
+
+NotificationAb[] notifications =
+{
+  new EmailNotificationAb("bezalove@gmail.com"),  
+  new SmsNotificationAb("0943987854"),
+  new PushNotificationAb("bezz")
+};
+Console.WriteLine("///////////Abstract notification//////////////");
+foreach(NotificationAb notification in notifications)
+{
+    notification.ShowRecipient();
+    notification.Send();
+}
+/// 
+/// 
+/// 
+Console.WriteLine("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+
+EmployeeAbs employee = new Dev(101,"mekbib",5000);
+EmployeeAbs employee1 = new Managers(102,"Dr Abebe",120000);
+EmployeeAbs employee2 = new SalesPerson(103,"beza",5000,400);
+
+Console.WriteLine(employee.CalculateSalary());
+Console.WriteLine(employee1.CalculateSalary());
+Console.WriteLine(employee2.CalculateSalary());
+
+/// 
+/// 
+EmployeeAbs[] employees =
+{
+    new Dev(111,"kidu",4300),
+    new Managers(112,"ashalew",45000),
+    new SalesPerson(113,"kal",1234,700)
+
+};
+Console.WriteLine("(((((((())))))))");
+foreach(EmployeeAbs employeeAbs in employees)
+{
+    Console.WriteLine(employeeAbs.CalculateSalary());
+}
+/// 
+Console.WriteLine("##$$$%%%%))(*&&^%%%)");
+
+Payment payment1 =new CreditCardPayment(101,2000,"meron",3400);
+
+Payment[] payments =
+{
+    new CreditCardPayment(102,2300,"dawit",4000),
+    new BankTransferpayment(103,3000,"belete","Dashen Bank"),
+    new MobileMoneyPayment(104,500,"henock","0919385189")
+};
+foreach(Payment payment2 in payments)
+{
+    payment2.DisplayInfo();
+    Console.WriteLine(payment2.ProcessPayment());
+}
+/// 
+/// 
+Console.WriteLine("interface style");
+
+INotifications[] notifications2 =
+{
+    new EmailNotifications1(),
+    new SmsNotifications1(),
+    new PushNotifications1(),
+};
+
+foreach(INotifications inotify in notifications2)
+{
+   inotify.Send("hello bemni");
+}
+
+INotificationInfo[] notificationInfo =
+{
+    new EmailNotifications1(),
+    new SmsNotifications1(),
+    new PushNotifications1()
+};
+
+foreach(INotificationInfo notificationInf in notificationInfo)
+{
+    notificationInf.Message("Yabsira");
+}
+
+/// 
+
+
 class VehiclesCls
 {
     public string? Name;
     public string? PlateNumber;
     public decimal EngineHours;
     public decimal DistanceKm;
-
     public void DisplayInfo()
     {
         Console.WriteLine(Name);
         Console.WriteLine(PlateNumber);
         Console.WriteLine(EngineHours);
         Console.WriteLine(DistanceKm);
-
     }
 
 }
@@ -437,7 +586,6 @@ class vehicleProp
 
     }
     public bool NeedsMaintenance => EngineHours >= 1000;
-
 }
 
 class VehicleConst

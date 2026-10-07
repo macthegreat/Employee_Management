@@ -12,3 +12,4 @@
 /Users/administrator/Documents/ASP.Net_AAU/projects/c#training/ConsoleApp1/obj/Debug/net10.0/ConsoleApp1.pdb
 /Users/administrator/Documents/ASP.Net_AAU/projects/c#training/ConsoleApp1/obj/Debug/net10.0/ConsoleApp1.genruntimeconfig.cache
 /Users/administrator/Documents/ASP.Net_AAU/projects/c#training/ConsoleApp1/obj/Debug/net10.0/ref/ConsoleApp1.dll
+/Users/administrator/Documents/ASP.Net_AAU/projects/c#training/ConsoleApp1/obj/Debug/net10.0/ConsoleApp1.sourcelink.json
