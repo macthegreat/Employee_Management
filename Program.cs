@@ -13,7 +13,11 @@ using AbNotify;
 using EmployeeAb;
 using Payments;
 using Payments;
+using Products;
+using structs;
 using IntNotify;
+using System.Security.Cryptography.X509Certificates;
+using System.Drawing;
 
 
 static bool IsMaintenanceRequired(int engineHour) => engineHour >= 1000 ? true : false;
@@ -550,9 +554,50 @@ foreach(INotificationInfo notificationInf in notificationInfo)
 {
     notificationInf.Message("Yabsira");
 }
+/// 
+
+    Product product1 = new Product(101,"TeleVision",23000m,"Electronics");
+     Product product5 = new Product(101,"TeleVision",23000m,"Electronics");
+    Product product2 = new Product(102,"Car" ,230000,"vehicle");
+    Product product3 = new Product(103,"Laptop",900000,"Electronics");
+    Product product4 = product1 with
+    {
+        Price = 7500
+    } ;
+    Console.WriteLine(product4.Name);
+     Console.WriteLine(product4.Price);
+      Console.WriteLine(product4.Category);
+   
+    Console.WriteLine(product1 == product5);
+
+    CreateProductDto productDto1 = new CreateProductDto("Charger",2343,"electronics");
+    CreateProductDto productDto2 = new CreateProductDto("Charger",2343,"electronics");
+    CreateProductDto productDto3 = new CreateProductDto("PhoneCase",1500,"case");
+
+
+    Console.WriteLine(productDto1 == productDto2);
+    Console.WriteLine(productDto1.Name);
+     Console.WriteLine(productDto1.Price);
+    Console.WriteLine(productDto1.Category);
 
 /// 
 
+Rectangles rectangle1 = new Rectangles(10, 5);
+Rectangles rectangle2 = new Rectangles(4, 3);
+
+Console.WriteLine($"Area: {rectangle1.CalculateArea()}");
+Console.WriteLine($"Perimeter: {rectangle1.calculatePerimeter()}");
+Console.WriteLine($"Area: {rectangle2.CalculateArea()}");
+Console.WriteLine($"Perimeter: {rectangle2.calculatePerimeter()}");
+
+Rectangles rectangle3 = rectangle1;
+
+rectangle3.Width = 20;
+
+Console.WriteLine($"Original width: {rectangle1.Width}");
+Console.WriteLine($"Copied width: {rectangle3.Width}");
+
+/// 
 
 class VehiclesCls
 {
