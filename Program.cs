@@ -12,12 +12,16 @@ using Shipping;
 using AbNotify;
 using EmployeeAb;
 using Payments;
-using Payments;
+using Generics;
 using Products;
 using structs;
 using IntNotify;
 using System.Security.Cryptography.X509Certificates;
 using System.Drawing;
+using System.Reflection;
+using System.ComponentModel.DataAnnotations;
+using Deligates;
+using Lambdas;
 
 
 static bool IsMaintenanceRequired(int engineHour) => engineHour >= 1000 ? true : false;
@@ -596,6 +600,41 @@ rectangle3.Width = 20;
 
 Console.WriteLine($"Original width: {rectangle1.Width}");
 Console.WriteLine($"Copied width: {rectangle3.Width}");
+
+/// 
+
+
+    Storage<int> storage =new Storage<int>(100);
+    
+    Storage<string> storage1= new Storage<string>("Mekbib");
+    Storage<decimal>storage2=new Storage<decimal>(2500.50m);
+
+    Console.WriteLine(storage.First);
+    Console.WriteLine(storage1.First);
+    Console.WriteLine(storage2.First);
+
+    Storage<int>.Display(100);
+Storage<string>.Display("Hello Generics");
+Storage<decimal>.Display(99.99m);
+
+    
+
+   
+/// 
+PriceCalculator calculator = PriceOperations.ApplyDiscount;
+Console.WriteLine($"here is the price after discount: {calculator(1000)}");
+PriceCalculator calculator1 =PriceOperations.AddTax;
+Console.WriteLine(calculator1(1000));
+
+PriceCalculator calculator2=PriceOperations.DoublePrice;
+Console.WriteLine(calculator2(1000));
+
+/// 
+Console.WriteLine("##########");
+Console.WriteLine(Prog.Discount(1000m));
+Console.WriteLine(Prog.AddTax(1000m));
+Console.WriteLine(Prog.DoublePrice(1000m));
+Console.WriteLine($"total: {Prog.AddPrice(100m,250m)}");
 
 /// 
 
