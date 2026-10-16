@@ -22,6 +22,9 @@ using System.Reflection;
 using System.ComponentModel.DataAnnotations;
 using Deligates;
 using Lambdas;
+using Linqs;
+using Enumerates;
+using Queryable;
 
 
 static bool IsMaintenanceRequired(int engineHour) => engineHour >= 1000 ? true : false;
@@ -604,6 +607,8 @@ Console.WriteLine($"Copied width: {rectangle3.Width}");
 /// 
 
 
+
+
     Storage<int> storage =new Storage<int>(100);
     
     Storage<string> storage1= new Storage<string>("Mekbib");
@@ -637,6 +642,146 @@ Console.WriteLine(Prog.DoublePrice(1000m));
 Console.WriteLine($"total: {Prog.AddPrice(100m,250m)}");
 
 /// 
+List<int> bezT =new List<int>
+{
+    12,34,56,78,90
+};
+var result = bezT.Where(number => number > 64);
+foreach(int bex in result)
+{
+    Console.WriteLine(bex);
+}
+
+  List<Productq> linqProd = new List<Productq>
+  {
+    new Productq("phone", 10000m, "electronics"),
+    new Productq("Laptop", 23500m, "electronics"),
+    new Productq("backBag", 800m, "misc"),
+    new Productq("car", 30000m, "vehicle"),
+    new Productq("aprtment", 1000000m, "Home")
+  };
+
+var expensive =linqProd.Where(linkprod => linkprod.Price > 1000m);
+foreach(Productq prod in expensive)
+{
+    Console.WriteLine($"{prod.Name} - {prod.Price}");
+}
+var ProductName = linqProd.Select(product => product.Name);
+foreach(string prName in ProductName)
+{
+    Console.WriteLine(prName);
+}
+bool hasKibateProduct = linqProd.Any(prod => prod.Price > 50000m);
+Console.WriteLine(hasKibateProduct);
+var sortedProducts = linqProd.OrderBy(prod =>prod.Price);
+foreach(Productq pro in sortedProducts)
+{
+    Console.WriteLine($"{pro.Name} - {pro.Price}");
+}
+/// 
+/// 
+
+List<Students> StudentList = new List<Students>
+{
+    new Students("Abebe",98),
+    new Students("beza",100),
+    new Students("Haile",67),
+    new Students("khalid",23)
+};
+
+var topStudents = StudentList.Where(student => student.Score > 70);
+foreach(Students kelem in topStudents)
+{
+    Console.WriteLine($"{kelem.Name} - {kelem.Score}");
+}
+
+bool exeptionalStudent= StudentList.Any(student => student.Score >=100);
+if (exeptionalStudent)
+{
+    var nameofMega = StudentList.Where(mega =>mega.Score > 99);
+    foreach(Students mega in nameofMega)
+    {
+        Console.WriteLine($"our mega student is : {mega.Name} with score: {mega.Score}");
+    }
+}
+else
+{
+    Console.WriteLine("no mega available");
+}
+
+var orderByScore = StudentList.OrderByDescending(student => student.Score);
+foreach(Students s in orderByScore)
+{
+    Console.WriteLine($"{s.Name} - {s.Score}");
+}
+var studentNames=StudentList.Select(student=>student.Name);
+foreach(string stud in studentNames)
+{
+    Console.WriteLine($"{stud}");
+}
+
+var passedStudentNames = StudentList.Where(student => student.Score >70);
+foreach(Students st in passedStudentNames)
+{
+    Console.WriteLine($"{st.Name}");
+}
+
+
+var passedStudents = StudentList.Count(student => student.Score >= 70);
+
+
+Console.WriteLine($"Number students score more than the passing poit {passedStudents}");
+
+
+
+/// 
+List<EmployeeI> Employeez = new List<EmployeeI>
+{
+    new EmployeeI("Abebe",8000),
+    new EmployeeI("Hana",15000),
+    new EmployeeI("Dawit",6500),
+    new EmployeeI("Sara",20000),
+    new EmployeeI("meron",12000)
+
+};
+
+var goodSalary = Employeez.Where(employee => employee.Salary >=10000);
+IEnumerable<EmployeeI> emp = Employeez.Where(employeez => employeez.Salary>=10000);
+foreach(EmployeeI sal in emp)
+{
+    Console.WriteLine($"{sal.Name} - {sal.Salary}");
+}
+
+IEnumerable<EmployeeI> orderedSal = Employeez.OrderByDescending(employee=>employee.Salary);
+foreach(EmployeeI ord in orderedSal)
+{
+    Console.WriteLine($"Enumerable {ord.Name}-{ord.Salary}");
+}
+
+//filtering query is because it gives us more general way to work with sequence
+/// 
+List<Employeequery> QEmployee = new List<Employeequery>
+{
+    new Employeequery(101,"abebe",1234),
+    new Employeequery(102,"bety",2323),
+    new Employeequery(103, "danat",9000),
+    new Employeequery(104,"amri",23000)
+};
+
+IQueryable<Employeequery> employeequeries = QEmployee.AsQueryable();
+IQueryable<Employeequery> orderedBySalary = employeequeries.Where(employee => employee.Salary >=10000)
+.OrderByDescending(employee=>employee.Salary);
+foreach(Employeequery q in orderedBySalary)
+{
+    Console.WriteLine($"querytest:{q.Id} {q.Name} - {q.Salary}");
+}
+
+IQueryable<string> filteredEmployeeName = orderedBySalary.Select(employee => employee.Name);
+foreach(string p in filteredEmployeeName)
+{
+    Console.WriteLine($"{p}");
+}
+/// 
 
 class VehiclesCls
 {
@@ -653,6 +798,13 @@ class VehiclesCls
     }
 
 }
+//
+
+
+
+//
+
+
 class vehicleProp
 {
     public int Id { get; set; }
