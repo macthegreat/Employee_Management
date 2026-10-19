@@ -25,6 +25,9 @@ using Lambdas;
 using Linqs;
 using Enumerates;
 using Queryable;
+using Extension;
+using System.Threading.Tasks.Dataflow;
+using AsyncAwaits;
 
 
 static bool IsMaintenanceRequired(int engineHour) => engineHour >= 1000 ? true : false;
@@ -394,8 +397,8 @@ Console.WriteLine("**************");
 
 Console.WriteLine("######################");
 
-Developer developer1 =new(100,"beza",20000,"Nodejs");
-Developer developer2 =new(101,"Mekbib",50000,"C#");
+Developer developer1 = new(100, "beza", 20000, "Nodejs");
+Developer developer2 = new(101, "Mekbib", 50000, "C#");
 Console.WriteLine(developer1.Name);
 Console.WriteLine(developer1.ProgrammingLanguage);
 developer1.ClockIn();
@@ -403,7 +406,7 @@ developer2.ClockOut();
 developer1.Work();
 developer2.Work();
 
-Manager manager1=new(104,"Sara",70000,8);
+Manager manager1 = new(104, "Sara", 70000, 8);
 Console.WriteLine(manager1.Name);
 Console.WriteLine(manager1.TeamSize);
 manager1.ClockIn();
@@ -430,7 +433,7 @@ Notification Push = new PushNotification();
 
 Email.Send();
 Sms.Send();
-Push.Send(); 
+Push.Send();
 
 Notification[] notififications =
 {
@@ -460,18 +463,18 @@ Shippings[] shippings =
 {
   new StandardShipping(),
   new ExpressShipping(),
-  new InternationalShipping()  
+  new InternationalShipping()
 };
 
-foreach(Shippings shipping in shippings)
+foreach (Shippings shipping in shippings)
 {
     Console.WriteLine($"{shipping.CalculateCost(10)}");
 }
 /// 
 
 NotificationAb emailAb = new EmailNotificationAb("mekbibk3795@gmail.com");
-NotificationAb smsAb=new SmsNotificationAb("091091091");
-NotificationAb pushAb=new PushNotificationAb("mekbib");
+NotificationAb smsAb = new SmsNotificationAb("091091091");
+NotificationAb pushAb = new PushNotificationAb("mekbib");
 
 emailAb.Send();
 emailAb.ShowRecipient();
@@ -481,12 +484,12 @@ pushAb.Send();
 
 NotificationAb[] notifications =
 {
-  new EmailNotificationAb("bezalove@gmail.com"),  
+  new EmailNotificationAb("bezalove@gmail.com"),
   new SmsNotificationAb("0943987854"),
   new PushNotificationAb("bezz")
 };
 Console.WriteLine("///////////Abstract notification//////////////");
-foreach(NotificationAb notification in notifications)
+foreach (NotificationAb notification in notifications)
 {
     notification.ShowRecipient();
     notification.Send();
@@ -496,9 +499,9 @@ foreach(NotificationAb notification in notifications)
 /// 
 Console.WriteLine("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
 
-EmployeeAbs employee = new Dev(101,"mekbib",5000);
-EmployeeAbs employee1 = new Managers(102,"Dr Abebe",120000);
-EmployeeAbs employee2 = new SalesPerson(103,"beza",5000,400);
+EmployeeAbs employee = new Dev(101, "mekbib", 5000);
+EmployeeAbs employee1 = new Managers(102, "Dr Abebe", 120000);
+EmployeeAbs employee2 = new SalesPerson(103, "beza", 5000, 400);
 
 Console.WriteLine(employee.CalculateSalary());
 Console.WriteLine(employee1.CalculateSalary());
@@ -514,14 +517,14 @@ EmployeeAbs[] employees =
 
 };
 Console.WriteLine("(((((((())))))))");
-foreach(EmployeeAbs employeeAbs in employees)
+foreach (EmployeeAbs employeeAbs in employees)
 {
     Console.WriteLine(employeeAbs.CalculateSalary());
 }
 /// 
 Console.WriteLine("##$$$%%%%))(*&&^%%%)");
 
-Payment payment1 =new CreditCardPayment(101,2000,"meron",3400);
+Payment payment1 = new CreditCardPayment(101, 2000, "meron", 3400);
 
 Payment[] payments =
 {
@@ -529,7 +532,7 @@ Payment[] payments =
     new BankTransferpayment(103,3000,"belete","Dashen Bank"),
     new MobileMoneyPayment(104,500,"henock","0919385189")
 };
-foreach(Payment payment2 in payments)
+foreach (Payment payment2 in payments)
 {
     payment2.DisplayInfo();
     Console.WriteLine(payment2.ProcessPayment());
@@ -545,9 +548,9 @@ INotifications[] notifications2 =
     new PushNotifications1(),
 };
 
-foreach(INotifications inotify in notifications2)
+foreach (INotifications inotify in notifications2)
 {
-   inotify.Send("hello bemni");
+    inotify.Send("hello bemni");
 }
 
 INotificationInfo[] notificationInfo =
@@ -557,35 +560,35 @@ INotificationInfo[] notificationInfo =
     new PushNotifications1()
 };
 
-foreach(INotificationInfo notificationInf in notificationInfo)
+foreach (INotificationInfo notificationInf in notificationInfo)
 {
     notificationInf.Message("Yabsira");
 }
 /// 
 
-    Product product1 = new Product(101,"TeleVision",23000m,"Electronics");
-     Product product5 = new Product(101,"TeleVision",23000m,"Electronics");
-    Product product2 = new Product(102,"Car" ,230000,"vehicle");
-    Product product3 = new Product(103,"Laptop",900000,"Electronics");
-    Product product4 = product1 with
-    {
-        Price = 7500
-    } ;
-    Console.WriteLine(product4.Name);
-     Console.WriteLine(product4.Price);
-      Console.WriteLine(product4.Category);
-   
-    Console.WriteLine(product1 == product5);
+Product product1 = new Product(101, "TeleVision", 23000m, "Electronics");
+Product product5 = new Product(101, "TeleVision", 23000m, "Electronics");
+Product product2 = new Product(102, "Car", 230000, "vehicle");
+Product product3 = new Product(103, "Laptop", 900000, "Electronics");
+Product product4 = product1 with
+{
+    Price = 7500
+};
+Console.WriteLine(product4.Name);
+Console.WriteLine(product4.Price);
+Console.WriteLine(product4.Category);
 
-    CreateProductDto productDto1 = new CreateProductDto("Charger",2343,"electronics");
-    CreateProductDto productDto2 = new CreateProductDto("Charger",2343,"electronics");
-    CreateProductDto productDto3 = new CreateProductDto("PhoneCase",1500,"case");
+Console.WriteLine(product1 == product5);
+
+CreateProductDto productDto1 = new CreateProductDto("Charger", 2343, "electronics");
+CreateProductDto productDto2 = new CreateProductDto("Charger", 2343, "electronics");
+CreateProductDto productDto3 = new CreateProductDto("PhoneCase", 1500, "case");
 
 
-    Console.WriteLine(productDto1 == productDto2);
-    Console.WriteLine(productDto1.Name);
-     Console.WriteLine(productDto1.Price);
-    Console.WriteLine(productDto1.Category);
+Console.WriteLine(productDto1 == productDto2);
+Console.WriteLine(productDto1.Name);
+Console.WriteLine(productDto1.Price);
+Console.WriteLine(productDto1.Category);
 
 /// 
 
@@ -609,29 +612,29 @@ Console.WriteLine($"Copied width: {rectangle3.Width}");
 
 
 
-    Storage<int> storage =new Storage<int>(100);
-    
-    Storage<string> storage1= new Storage<string>("Mekbib");
-    Storage<decimal>storage2=new Storage<decimal>(2500.50m);
+Storage<int> storage = new Storage<int>(100);
 
-    Console.WriteLine(storage.First);
-    Console.WriteLine(storage1.First);
-    Console.WriteLine(storage2.First);
+Storage<string> storage1 = new Storage<string>("Mekbib");
+Storage<decimal> storage2 = new Storage<decimal>(2500.50m);
 
-    Storage<int>.Display(100);
+Console.WriteLine(storage.First);
+Console.WriteLine(storage1.First);
+Console.WriteLine(storage2.First);
+
+Storage<int>.Display(100);
 Storage<string>.Display("Hello Generics");
 Storage<decimal>.Display(99.99m);
 
-    
 
-   
+
+
 /// 
 PriceCalculator calculator = PriceOperations.ApplyDiscount;
 Console.WriteLine($"here is the price after discount: {calculator(1000)}");
-PriceCalculator calculator1 =PriceOperations.AddTax;
+PriceCalculator calculator1 = PriceOperations.AddTax;
 Console.WriteLine(calculator1(1000));
 
-PriceCalculator calculator2=PriceOperations.DoublePrice;
+PriceCalculator calculator2 = PriceOperations.DoublePrice;
 Console.WriteLine(calculator2(1000));
 
 /// 
@@ -639,20 +642,20 @@ Console.WriteLine("##########");
 Console.WriteLine(Prog.Discount(1000m));
 Console.WriteLine(Prog.AddTax(1000m));
 Console.WriteLine(Prog.DoublePrice(1000m));
-Console.WriteLine($"total: {Prog.AddPrice(100m,250m)}");
+Console.WriteLine($"total: {Prog.AddPrice(100m, 250m)}");
 
 /// 
-List<int> bezT =new List<int>
+List<int> bezT = new List<int>
 {
     12,34,56,78,90
 };
 var result = bezT.Where(number => number > 64);
-foreach(int bex in result)
+foreach (int bex in result)
 {
     Console.WriteLine(bex);
 }
 
-  List<Productq> linqProd = new List<Productq>
+List<Productq> linqProd = new List<Productq>
   {
     new Productq("phone", 10000m, "electronics"),
     new Productq("Laptop", 23500m, "electronics"),
@@ -661,20 +664,20 @@ foreach(int bex in result)
     new Productq("aprtment", 1000000m, "Home")
   };
 
-var expensive =linqProd.Where(linkprod => linkprod.Price > 1000m);
-foreach(Productq prod in expensive)
+var expensive = linqProd.Where(linkprod => linkprod.Price > 1000m);
+foreach (Productq prod in expensive)
 {
     Console.WriteLine($"{prod.Name} - {prod.Price}");
 }
 var ProductName = linqProd.Select(product => product.Name);
-foreach(string prName in ProductName)
+foreach (string prName in ProductName)
 {
     Console.WriteLine(prName);
 }
 bool hasKibateProduct = linqProd.Any(prod => prod.Price > 50000m);
 Console.WriteLine(hasKibateProduct);
-var sortedProducts = linqProd.OrderBy(prod =>prod.Price);
-foreach(Productq pro in sortedProducts)
+var sortedProducts = linqProd.OrderBy(prod => prod.Price);
+foreach (Productq pro in sortedProducts)
 {
     Console.WriteLine($"{pro.Name} - {pro.Price}");
 }
@@ -690,16 +693,16 @@ List<Students> StudentList = new List<Students>
 };
 
 var topStudents = StudentList.Where(student => student.Score > 70);
-foreach(Students kelem in topStudents)
+foreach (Students kelem in topStudents)
 {
     Console.WriteLine($"{kelem.Name} - {kelem.Score}");
 }
 
-bool exeptionalStudent= StudentList.Any(student => student.Score >=100);
+bool exeptionalStudent = StudentList.Any(student => student.Score >= 100);
 if (exeptionalStudent)
 {
-    var nameofMega = StudentList.Where(mega =>mega.Score > 99);
-    foreach(Students mega in nameofMega)
+    var nameofMega = StudentList.Where(mega => mega.Score > 99);
+    foreach (Students mega in nameofMega)
     {
         Console.WriteLine($"our mega student is : {mega.Name} with score: {mega.Score}");
     }
@@ -710,18 +713,18 @@ else
 }
 
 var orderByScore = StudentList.OrderByDescending(student => student.Score);
-foreach(Students s in orderByScore)
+foreach (Students s in orderByScore)
 {
     Console.WriteLine($"{s.Name} - {s.Score}");
 }
-var studentNames=StudentList.Select(student=>student.Name);
-foreach(string stud in studentNames)
+var studentNames = StudentList.Select(student => student.Name);
+foreach (string stud in studentNames)
 {
     Console.WriteLine($"{stud}");
 }
 
-var passedStudentNames = StudentList.Where(student => student.Score >70);
-foreach(Students st in passedStudentNames)
+var passedStudentNames = StudentList.Where(student => student.Score > 70);
+foreach (Students st in passedStudentNames)
 {
     Console.WriteLine($"{st.Name}");
 }
@@ -745,15 +748,15 @@ List<EmployeeI> Employeez = new List<EmployeeI>
 
 };
 
-var goodSalary = Employeez.Where(employee => employee.Salary >=10000);
-IEnumerable<EmployeeI> emp = Employeez.Where(employeez => employeez.Salary>=10000);
-foreach(EmployeeI sal in emp)
+var goodSalary = Employeez.Where(employee => employee.Salary >= 10000);
+IEnumerable<EmployeeI> emp = Employeez.Where(employeez => employeez.Salary >= 10000);
+foreach (EmployeeI sal in emp)
 {
     Console.WriteLine($"{sal.Name} - {sal.Salary}");
 }
 
-IEnumerable<EmployeeI> orderedSal = Employeez.OrderByDescending(employee=>employee.Salary);
-foreach(EmployeeI ord in orderedSal)
+IEnumerable<EmployeeI> orderedSal = Employeez.OrderByDescending(employee => employee.Salary);
+foreach (EmployeeI ord in orderedSal)
 {
     Console.WriteLine($"Enumerable {ord.Name}-{ord.Salary}");
 }
@@ -769,18 +772,73 @@ List<Employeequery> QEmployee = new List<Employeequery>
 };
 
 IQueryable<Employeequery> employeequeries = QEmployee.AsQueryable();
-IQueryable<Employeequery> orderedBySalary = employeequeries.Where(employee => employee.Salary >=10000)
-.OrderByDescending(employee=>employee.Salary);
-foreach(Employeequery q in orderedBySalary)
+IQueryable<Employeequery> orderedBySalary = employeequeries.Where(employee => employee.Salary >= 10000)
+.OrderByDescending(employee => employee.Salary);
+foreach (Employeequery q in orderedBySalary)
 {
     Console.WriteLine($"querytest:{q.Id} {q.Name} - {q.Salary}");
 }
 
 IQueryable<string> filteredEmployeeName = orderedBySalary.Select(employee => employee.Name);
-foreach(string p in filteredEmployeeName)
+foreach (string p in filteredEmployeeName)
 {
     Console.WriteLine($"{p}");
 }
+/// 
+string myName = "mekbib";
+Console.WriteLine(myName.AddGreeting());
+
+/// 
+Console.WriteLine("enter a number");
+
+try
+{
+    int MyNumber = int.Parse(Console.ReadLine()!);
+    int MyResult = 100 / MyNumber;
+    Console.WriteLine(MyResult);
+}
+catch (FormatException)
+{
+    Console.WriteLine("Please enter a valid integer.");
+}
+catch (DivideByZeroException)
+{
+    Console.WriteLine("You cannot divide by zero.");
+}
+finally
+{
+    Console.WriteLine("Calculation attempt finished");
+}
+/// 
+try
+{
+    using (StreamWriter writer = new StreamWriter("lesson33.txt"))
+    {
+        writer.WriteLine("Learning IDisposable in C#");
+    }
+    Console.WriteLine("File written successfully.");
+}
+finally
+{
+    Console.WriteLine("Program finished.");
+}
+
+
+
+
+/// 
+
+ async Task<int> GetNumberAsync()
+    {
+        Console.WriteLine("starting...");
+        await Task.Delay(1000);
+        return 42;
+        
+    }
+
+int resultts = await GetNumberAsync();
+Console.WriteLine(resultts);
+
 /// 
 
 class VehiclesCls
@@ -799,7 +857,6 @@ class VehiclesCls
 
 }
 //
-
 
 
 //
